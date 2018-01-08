@@ -1048,11 +1048,12 @@ public class MainWindow extends JFrame{
 					nFormat.setMaximumFractionDigits(2);
 					nFormat.setMinimumFractionDigits(2);
 					String err_temp = "";
+					String matrix_name = "";
 					Matrix result = null;
 					try{
 						int start_index = expression.indexOf("(");
 						int end_index = expression.indexOf(")");
-						String matrix_name = expression.substring(start_index+1, end_index);
+						matrix_name= expression.substring(start_index+1, end_index);
 						matrix_name = matrix_name.replaceAll(" ", "");//过滤空格，获取矩阵名字
 						
 						
@@ -1095,12 +1096,8 @@ public class MainWindow extends JFrame{
 						
 					}catch(MatrixArithException err){
 						System.out.println(err.toString());
-						//过滤掉err中无关的报错信息
-						err_temp = err.toString();
-						int start = err_temp.lastIndexOf(":");
-						err_temp = err_temp.substring(start+2, err_temp.length());
 						
-						this.append(err_temp);  
+						this.append("矩阵 \"" + matrix_name + "\"不可逆！"); 
 						this.append("\n\n");  
 						this.append(">>");
 						String his_temp = J222.getText();
